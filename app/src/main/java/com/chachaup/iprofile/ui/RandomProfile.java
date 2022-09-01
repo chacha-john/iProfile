@@ -9,9 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chachaup.iprofile.R;
+import com.chachaup.iprofile.models.IProfileResponse;
+import com.chachaup.iprofile.models.Result;
+import com.chachaup.iprofile.network.RandomUserAPI;
+import com.chachaup.iprofile.network.RandomUserClient;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RandomProfile extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.buttonRefresh)
@@ -35,6 +43,23 @@ public class RandomProfile extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_profile);
         ButterKnife.bind(this);
+
+        RandomUserAPI client = RandomUserClient.getClient();
+        Call<Result> call = client.getResult();
+        call.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                if (response.isSuccessful()){
+                    mEmail.setText(response.body().getEmail());
+                    mFullName.setText(response.body().getName().getFirst());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                mFullName.setText("Something went wrong. Please check your Internet connection and try again later");
+            }
+        });
 
     }
 

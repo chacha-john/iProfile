@@ -6,8 +6,8 @@ import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 import android.os.Parcelable.Creator;
 
-import com.chachaup.iprofile.Street;
-import com.chachaup.iprofile.Timezone;
+import com.chachaup.iprofile.models.Street;
+import com.chachaup.iprofile.models.Timezone;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
