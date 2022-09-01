@@ -70,6 +70,10 @@ dependencies {
 
     //firebase authentication
     implementation 'com.google.firebase:firebase-auth'
+
+    //card view
+    implementation 'com.google.android.material:material:1.2.1'
+
 }
 
 //apply plugin: 'com.google.gms.google-services'
