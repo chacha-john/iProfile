@@ -24,8 +24,8 @@ import retrofit2.Response;
 public class RandomProfile extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.buttonRefresh)
     Button mRefresh;
-    @BindView(R.id.imageView)
-    ImageView mProfilePhoto;
+//    @BindView(R.id.imageView)
+//    ImageView mProfilePhoto;
     @BindView(R.id.textViewFullName)
     TextView mFullName;
     @BindView(R.id.textViewUsername) TextView mUsername;
@@ -37,36 +37,55 @@ public class RandomProfile extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.textViewDateOfBirth) TextView mDateOfBirth;
     @BindView(R.id.textViewAge) TextView mAge;
 
-
+    Result result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_profile);
         ButterKnife.bind(this);
 
-        RandomUserAPI client = RandomUserClient.getClient();
-        Call<Result> call = client.getResult();
-        call.enqueue(new Callback<Result>() {
-            @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                if (response.isSuccessful()){
-                    mEmail.setText(response.body().getEmail());
-                    mFullName.setText(response.body().getName().getFirst());
-                }
-            }
+        mRefresh.setOnClickListener(this);
 
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-                mFullName.setText("Something went wrong. Please check your Internet connection and try again later");
-            }
-        });
-
+        getProfile();
     }
+
 
     @Override
     public void onClick(View v) {
         if (v == mRefresh){
-
+            getProfile();
         }
+    }
+
+    private void getProfile(){
+        RandomUserAPI client = RandomUserClient.getClient();
+
+        Call<IProfileResponse> call = client.getResult();
+        call.enqueue(new Callback<IProfileResponse>() {
+            @Override
+            public void onResponse(Call<IProfileResponse> call, Response<IProfileResponse> response) {
+                if (response.isSuccessful() && response.body().getResults().get(0)!=null) {
+                    result = response.body().getResults().get(0);
+                    String fullName = result.getName().getTitle() + " " + result.getName().getFirst() + " " + result.getName().getLast();
+                    mFullName.setText(fullName);
+                    mUsername.setText("Game name: " + result.getLogin().getUsername());
+                    mPhone.setText(result.getPhone());
+                    mCell.setText(result.getCell());
+                    mEmail.setText(result.getEmail());
+                    String street = result.getLocation().getCity() + ", " + result.getLocation().getStreet();
+//                    mStreet.setText(street);
+                    String city = result.getLocation().getCity() + ", " + result.getLocation().getState() + ", " + result.getLocation().getCountry();
+//                    mCity.setText(city);
+//                    mDateOfBirth.setText(result.getDob().getDate().);
+                    mAge.setText(result.getDob().getAge().toString());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IProfileResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

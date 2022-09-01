@@ -10,5 +10,6 @@ import retrofit2.http.GET;
 public interface RandomUserAPI {
     //get single user profile
     @GET("api")
-    Call<Result> getResult();
+    Call<IProfileResponse> getResult();
+//    Call<Result> getResult();
 }
