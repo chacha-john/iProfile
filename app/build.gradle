@@ -22,7 +22,7 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'BEARER_TOKEN', BaseUrlToken
+//        it.buildConfigField 'String', 'BEARER_TOKEN', BaseUrlToken
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
