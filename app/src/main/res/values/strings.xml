@@ -1,5 +1,9 @@
 <resources>
+<!--    main resources-->
     <string name="app_name">iProfile</string>
+    <string name="title">iProfile</string>
+
+<!--    Random Profile Activity-->
     <string name="bookmark">Bookmark</string>
     <string name="refresh">Refresh</string>
     <string name="full_name">Full name</string>
@@ -13,7 +17,8 @@
     <string name="email">Email address</string>
     <string name="dob">Date of Birth</string>
     <string name="age">Age</string>
-    <string name="title">iProfile</string>
+
+<!--    Login Activity-->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -22,7 +27,14 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="login">Let\'s pickup where we left</string>
-    <string name="signup">Missing an account? Let\'s get you one</string>
+    <string name="login_button">Let\'s pickup where we left</string>
     <string name="login_message">Welcome back. Let\'s get you in.</string>
+    <string name="login_link">Already have an account? Let\'s get you in</string>
+
+<!--    create account activity -->
+    <string name="create_account_link">Missing an account? Let\'s get you one</string>
+    <string name="create_account_button">Sign up</string>
+    <string name="create_account_message">Hi there. Let\'s set up an account for you</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_repeat_password">Repeat Password</string>
 </resources>
