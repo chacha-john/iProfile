@@ -34,7 +34,7 @@ public class RandomProfile extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.textViewPhone) TextView mPhone;
     @BindView(R.id.textViewCell) TextView mCell;
     @BindView(R.id.textViewEmail) TextView mEmail;
-    @BindView(R.id.textViewDateOfBirth) TextView mDateOfBirth;
+//    @BindView(R.id.textViewDateOfBirth) TextView mDateOfBirth;
     @BindView(R.id.textViewAge) TextView mAge;
 
     Result result;
@@ -44,9 +44,9 @@ public class RandomProfile extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_random_profile);
         ButterKnife.bind(this);
 
-        mRefresh.setOnClickListener(this);
-
         getProfile();
+
+        mRefresh.setOnClickListener(this);
     }
 
 
@@ -69,15 +69,15 @@ public class RandomProfile extends AppCompatActivity implements View.OnClickList
                     String fullName = result.getName().getTitle() + " " + result.getName().getFirst() + " " + result.getName().getLast();
                     mFullName.setText(fullName);
                     mUsername.setText("Game name: " + result.getLogin().getUsername());
-                    mPhone.setText(result.getPhone());
-                    mCell.setText(result.getCell());
-                    mEmail.setText(result.getEmail());
-                    String street = result.getLocation().getCity() + ", " + result.getLocation().getStreet();
-//                    mStreet.setText(street);
+                    mPhone.setText("Phone: " + result.getPhone());
+                    mCell.setText("Cell: " + result.getCell());
+                    mEmail.setText("Email: " + result.getEmail());
+                    String street = result.getLocation().getStreet().getNumber().toString() + ", " + result.getLocation().getStreet().getName();
+                    mStreet.setText(street);
                     String city = result.getLocation().getCity() + ", " + result.getLocation().getState() + ", " + result.getLocation().getCountry();
-//                    mCity.setText(city);
+                    mCity.setText(city);
 //                    mDateOfBirth.setText(result.getDob().getDate().);
-                    mAge.setText(result.getDob().getAge().toString());
+                    mAge.setText("Age: " + result.getDob().getAge().toString() + " years");
                     Picasso.get().load(result.getPicture().getLarge()).into(mProfilePhoto);
 
                 }
