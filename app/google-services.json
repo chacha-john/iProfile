@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "134081604837",
+    "project_id": "iprofile-21",
+    "storage_bucket": "iprofile-21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134081604837:android:1cfef9b6daa343f3e7b80c",
+        "android_client_info": {
+          "package_name": "com.chachaup.iprofile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134081604837-mu26mpf383ck3r6g0ktvk9sh82fupidp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chachaup.iprofile",
+            "certificate_hash": "6fcb0839ea7393cc23c7536600ec147d41459baf"
+          }
+        },
+        {
+          "client_id": "134081604837-pha47m2c6vv0g39d01dkqh0bcutvin5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYMcSw4I2QcRug3ul_6T_LSbMg3lCEsFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134081604837-pha47m2c6vv0g39d01dkqh0bcutvin5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

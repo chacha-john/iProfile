@@ -37,4 +37,7 @@
     <string name="create_account_message">Hi there. Let\'s set up an account for you</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_repeat_password">Repeat Password</string>
+
+<!--    Overflow menus-->
+    <string name="logout_action">Logout</string>
 </resources>
