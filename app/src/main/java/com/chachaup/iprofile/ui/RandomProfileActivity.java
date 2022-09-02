@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RandomProfile extends AppCompatActivity implements View.OnClickListener {
+public class RandomProfileActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.buttonRefresh)
     Button mRefresh;
     @BindView(R.id.imageView)

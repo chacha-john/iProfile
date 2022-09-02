@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.RandomProfile"
+            android:name=".ui.RandomProfileActivity"
             android:exported="false"
             android:label="@string/title" />
     </application>
