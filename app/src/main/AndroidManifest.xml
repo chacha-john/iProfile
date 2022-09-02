@@ -14,14 +14,19 @@
         android:theme="@style/Theme.IProfile"
         tools:targetApi="31">
         <activity
-            android:name=".ui.RandomProfile"
-            android:exported="true">
+            android:name=".ui.LoginActivity"
+            android:exported="true"
+            android:label="@string/title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.RandomProfile"
+            android:label="@string/title"
+            android:exported="false"/>
     </application>
 
 </manifest>
