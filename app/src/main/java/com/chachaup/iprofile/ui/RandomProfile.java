@@ -24,8 +24,8 @@ import retrofit2.Response;
 public class RandomProfile extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.buttonRefresh)
     Button mRefresh;
-//    @BindView(R.id.imageView)
-//    ImageView mProfilePhoto;
+    @BindView(R.id.imageView)
+    ImageView mProfilePhoto;
     @BindView(R.id.textViewFullName)
     TextView mFullName;
     @BindView(R.id.textViewUsername) TextView mUsername;
@@ -78,6 +78,7 @@ public class RandomProfile extends AppCompatActivity implements View.OnClickList
 //                    mCity.setText(city);
 //                    mDateOfBirth.setText(result.getDob().getDate().);
                     mAge.setText(result.getDob().getAge().toString());
+                    Picasso.get().load(result.getPicture().getLarge()).into(mProfilePhoto);
 
                 }
             }
