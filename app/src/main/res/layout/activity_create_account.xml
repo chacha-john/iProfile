@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.CreateAccountActivity">
+<!--    TODO: change edit text to textInput layouts and text input edit texts-->
 
     <EditText
         android:id="@+id/editTextUsernameCreateAccount"

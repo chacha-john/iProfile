@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,6 +67,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         final String password = mPassCA.getText().toString().trim();
         final String repeatPassword = mRepeatPassCA.getText().toString().trim();
 
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(name);
+        boolean validPassword = isValidPassword(password,repeatPassword);
+        if (!validEmail || !validName || !validPassword) return;
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()){
@@ -106,5 +112,37 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         if (mAuthListener != null){
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    //validating inputs
+    private boolean isValidEmail(String aEmail){
+        if (aEmail == null || !Patterns.EMAIL_ADDRESS.matcher(aEmail).matches()){
+            mEmailCA.setError("Please enter a valid email address");
+            return false;
+
+        }
+        return true;
+    }
+
+    private boolean isValidName(String aName){
+        if (aName.equals("")){
+            mUsernameCA.setError("Username cannot be blank");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String aPassword, String aRPassword){
+        if (!aPassword.equals(aRPassword)){
+            mPassCA.setError("Passwords do not match!");
+            mRepeatPassCA.setError("Passwords do not match!");
+            return false;
+        }
+        if (aPassword.length()<6 || aRPassword.length()<6){
+            mPassCA.setError("Your password should contain at least six characters");
+            mRepeatPassCA.setError("Your password should contain at least six characters");
+            return false;
+        }
+        return true;
     }
 }
