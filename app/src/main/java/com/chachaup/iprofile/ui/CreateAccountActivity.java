@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +20,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
-    @BindView(R.id.textInputLayoutUsernameCreateAccount)
-    TextInputLayout mUsernameCreateAccount;
-    @BindView(R.id.textInputLayoutEmailCreateAccount) TextInputLayout mEmailCreateAccount;
-    @BindView(R.id.textInputLayoutPasswordCreateAccount) TextInputLayout mPasswordCreateAccount;
-    @BindView(R.id.textInputLayoutRepeatPasswordCreateAccount) TextInputLayout mRepeatPasswordCreateAccount;
+    @BindView(R.id.editTextEmailCreateAccount)
+    EditText mEmailCA;
+    @BindView(R.id.editTextPasswordCreateAccount) EditText mPassCA;
+    @BindView(R.id.editTextUsernameCreateAccount)
+    EditText mUsernameCA;
+    @BindView(R.id.editTextRepeatPasswordCreateAccount) EditText mRepeatPassCA;
     @BindView(R.id.buttonCreateAccount)
     Button mCreateAccountButton;
     @BindView(R.id.textViewLoginLink)
@@ -59,10 +61,10 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     }
 
     private void CreateNewUser(){
-        final String name = mUsernameCreateAccount.getEditText().getText().toString().trim();
-        final String email = mEmailCreateAccount.getEditText().getText().toString().trim();
-        final String password = mPasswordCreateAccount.getEditText().getText().toString().trim();
-        final String repeatPassword = mRepeatPasswordCreateAccount.getEditText().getText().toString().trim();
+        final String name = mUsernameCA.getText().toString().trim();
+        final String email = mEmailCA.getText().toString().trim();
+        final String password = mPassCA.getText().toString().trim();
+        final String repeatPassword = mRepeatPassCA.getText().toString().trim();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -71,6 +73,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                     }
                     else{
 
+                        Toast.makeText(getApplicationContext(),"You ran into a problem", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
