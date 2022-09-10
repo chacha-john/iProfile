@@ -20,6 +20,7 @@ import com.chachaup.iprofile.models.Result;
 import com.chachaup.iprofile.network.RandomUserAPI;
 import com.chachaup.iprofile.network.RandomUserClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -41,8 +42,10 @@ public class RandomProfileActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.textViewPhone) TextView mPhone;
     @BindView(R.id.textViewCell) TextView mCell;
     @BindView(R.id.textViewEmail) TextView mEmail;
-//    @BindView(R.id.textViewDateOfBirth) TextView mDateOfBirth;
     @BindView(R.id.textViewAge) TextView mAge;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     Result result;
     @Override
@@ -50,6 +53,23 @@ public class RandomProfileActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_profile);
         ButterKnife.bind(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    getSupportActionBar().setTitle("Hi, " + user + "!");
+                }
+                else {
+                    Intent intent = new Intent(RandomProfileActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
 
         getProfile();
 
@@ -120,5 +140,19 @@ public class RandomProfileActivity extends AppCompatActivity implements View.OnC
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }

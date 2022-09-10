@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chachaup.iprofile.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,7 +81,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()){
-                        Toast.makeText(getApplicationContext(),"Account created successfully",Toast.LENGTH_SHORT).show();
+                        createUserProfile(Objects.requireNonNull(task.getResult().getUser()));
                     }
                     else{
 
@@ -144,5 +150,20 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             return false;
         }
         return true;
+    }
+
+    private void createUserProfile(final FirebaseUser user){
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mUsernameCA.toString())
+                .build();
+        user.updateProfile(request)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Log.d("user",user.getDisplayName());
+                        }
+                    }
+                });
     }
 }
